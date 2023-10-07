@@ -22,7 +22,7 @@ Homekit devices :
 
 The project is tested on a Synology, and is designed to run on tiny computer.
 
-Requires at least python3.8, python 3.9 is preferred.
+Requires at least python3.8. But python 3.9 is preferred.
 
 ## Installation
 Download the installation package named : **package.tar**
@@ -70,7 +70,7 @@ Its purpose is to launch/restart the gateway at a specific hour.
 Task settings is :
 /volume1/homes/ipxrelay/homekitrelay/homekitrelay.sh restart
 
-# configration file
+# configuration file
 
 Configuration is based on a JSON file.
 
