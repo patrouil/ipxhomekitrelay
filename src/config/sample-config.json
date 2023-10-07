@@ -1,0 +1,56 @@
+{
+  "homekit" : {
+    "pincode" : "511-37-112",
+    "bridge_name" : "ipx800",
+    "port" : 51133
+
+  },
+  "ipx800" : {
+    "host" : "192.168.7.99",
+    "port" : "80",
+    "interval" : 250,
+    "apikey" : "XXXXXXXXX"
+  },
+
+  "devices" : [
+    {
+      "name" : "Portail",
+      "service" : "GarageDoorOpener",
+      "key" : "VO49",
+      "open" : "SetR=9",
+      "close" : "SetR=10",
+      "obstruction" : "VO04"
+    },
+
+    {
+      "name" : "Lumiere Room 5",
+      "service" : "Lightbulb",
+      "key" : "R2",
+      "on" : "SetR=2",
+      "off" : "ClearR=2"
+    },
+    {
+      "name" : "Lumiere Room 3",
+      "service" : "Lightbulb",
+      "key" : "R11",
+      "on" : "SetR=1",
+      "off" : "ClearR=1"
+    },
+    {
+      "name": "Temp Ext",
+      "service" : "TemperatureSensor",
+      "key" : "THL1-TEMP"
+    },
+    {
+      "name": "Light Ext",
+      "service" : "LightSensor",
+      "key" : "THL1-LUM"
+    },
+    {
+      "name" : "volet Sud",
+      "service" : "WindowCovering",
+      "key" : "VR2-2",
+      "change" : "SetVR06=%d"
+    }
+   ]
+}

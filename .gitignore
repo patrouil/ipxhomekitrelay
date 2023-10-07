@@ -1,0 +1,5 @@
+/venv/
+/out/
+/config/busy_home.state
+/config/config.json
+/config/logging.conf
