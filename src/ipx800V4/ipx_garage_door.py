@@ -1,4 +1,5 @@
 import pyhap.const
+from pyhap.accessory import Accessory
 
 from ipx800V4.ipx_adapter import IPXAdapter
 
@@ -60,7 +61,6 @@ class IPXGarageDoorOpener(IPXAdapter):
         return self._state
     #
 
-
     def _target_value_to_state(self, val: bool) -> int:
         self._state = IPXGarageDoorOpener.CLOSING_STATE \
             if val else IPXGarageDoorOpener.OPENING_STATE
@@ -94,9 +94,17 @@ class IPXGarageDoorOpener(IPXAdapter):
 
     # end
 
+    @Accessory.run_at_interval(5)
+    async def run(self):
+        v = self.ipx_value
+        if ( self._state  == IPXGarageDoorOpener.CLOSING_STATE
+                or self._state  == IPXGarageDoorOpener.OPENING_STATE ) :
+            self.valueChangedListener(self.key, v, v)
+        return
+
     # override
     def valueChangedListener(self, device_code: str, new_val: str, old_val: str) -> None:
-        self.logger.debug("valueChangedListener: new value for % s : %s -> %s", device_code, old_val, new_val)
+        self.logger.debug("valueChangedListener: new value for % s : %s -> %s ", device_code, old_val, new_val)
         self.device_value_pair[device_code] = new_val
         if (device_code == self.key):
             self._device_value_to_state(new_val)
@@ -106,6 +114,8 @@ class IPXGarageDoorOpener(IPXAdapter):
         if (device_code == obstruction_key):
             # @TODO : convert and store in _obstruction
             self.obstruction_char.set_value(self._obstruction)
+        self.logger.debug("valueChangedListener: publish state %d : value %d", self._state, new_val)
+
         return
     # end
 # end class

@@ -1,4 +1,5 @@
 import pyhap.const
+from pyhap.accessory import Accessory
 
 from ipx800V4.ipx_adapter import IPXAdapter
 
@@ -14,11 +15,11 @@ class IPXWindowCovering(IPXAdapter):
     category = pyhap.const.CATEGORY_WINDOW_COVERING
     serviceName = "WindowCovering"
 
-    POS_STATE_Decreasing = 0
-    POS_STATE_Increasing = 1
+    POS_STATE_closing = 0
+    POS_STATE_Opening = 1
     POS_STATE_Stopped = 2
 
-    def __init__(self, device: dict, driver, ):
+    def __init__(self, device: dict, driver, ) -> None:
         super().__init__(device, driver)
         service = self.add_preload_service(IPXWindowCovering.serviceName)
 
@@ -38,12 +39,12 @@ class IPXWindowCovering(IPXAdapter):
     # end
 
     def _to_ipx_range(self, val: int) -> int:
-        return abs(val - 100)
+        return -val + 100
 
     # end
 
     def _to_homekit_range(self, val: int) -> int:
-        return max(val + 100, 100)
+        return -val + 100
 
     # end
 
@@ -57,14 +58,14 @@ class IPXWindowCovering(IPXAdapter):
 
     # end def
 
-    def _set_state_by_position(self, vr_pos: int):
-        if (self._curr_state is None or
+    def _set_state_by_position(self, vr_pos: int) -> None:
+        if (self._curr_state is None or self._lastLevel is None or
                 vr_pos == 0 or vr_pos == 100):
             self._curr_state = IPXWindowCovering.POS_STATE_Stopped
         elif (vr_pos > self._lastLevel):
-            self._curr_state = IPXWindowCovering.POS_STATE_Decreasing
+            self._curr_state = IPXWindowCovering.POS_STATE_closing
         elif (vr_pos < self._lastLevel):
-            self._curr_state = IPXWindowCovering.POS_STATE_Increasing
+            self._curr_state = IPXWindowCovering.POS_STATE_Opening
         else:
             self._curr_state = IPXWindowCovering.POS_STATE_Stopped
         self._lastLevel = vr_pos
@@ -78,10 +79,17 @@ class IPXWindowCovering(IPXAdapter):
 
     # end
 
+    @Accessory.run_at_interval(5)
+    async def run(self):
+        v = self.ipx_value
+        if ( self._curr_state != IPXWindowCovering.POS_STATE_Stopped) :
+            self.valueChangedListener(self.key, v, str(self._lastLevel))
+        return
+
     def valueChangedListener(self, device_code: str, new_val: str, old_val: str) -> None:
         self.logger.debug("valueChangedListener: new value for % s : %s -> %s", device_code, old_val, new_val)
         self.device_value_pair[device_code] = new_val
-        if (device_code == self.key):
+        if device_code == self.key:
             self._set_state_by_position(int(new_val))
             p = self._to_homekit_range(int(new_val))
             self.key_characteristics.set_value(p)  # key characteristice handler by parent class let chel obstrucation

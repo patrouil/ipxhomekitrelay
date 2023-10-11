@@ -16,7 +16,7 @@ Homekit devices :
 * Lightbulb
 * LightSensor
 * Switch
-* Outlet (to be tested)
+* Outlet
 * TemperatureSensor
 * WindowCovering
 
@@ -42,9 +42,7 @@ cp sample-config.json config.json
 ```
 See below for the configuration settings.
 
-As of version 3.5.1, HAP-python no longer supports python older than 3.6, because we
-are moving to asyncio. If your platform does not have a compatible python out of the
-box, you can install it manually or just use an older version of HAP-python.
+As of version 3.5.1, HAP-python no longer supports python older than 3.6, this code have been tested on python 3.9.
 
 ## Synology installation
 Create a user to host the package.
@@ -64,7 +62,7 @@ Task setting
 Then run the task mannually.
 
 ### created a start/stop task.
-Its purpose is to launch/restart the gateway at a specific hour.
+Its purpose is to daily launch/restart the gateway at a specified hour.
 ![img_2.png](docs/img_2.png)
 
 Task settings is :
@@ -74,3 +72,5 @@ Task settings is :
 
 Configuration is based on a JSON file.
 
+
+TBD

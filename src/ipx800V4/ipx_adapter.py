@@ -65,7 +65,7 @@ class IPXAdapter(Accessory, IPXListener):
         return self.device_value_pair[self.key]
 
     # override
-    def available(self) - > bool:
+    def available(self) -> bool:
         return self.ipxStatus
 
     def default_value(self, car: Characteristic, otherwise: object = None) -> object:
@@ -73,8 +73,8 @@ class IPXAdapter(Accessory, IPXListener):
 
     def get_value_from_ipx(self, car: Characteristic):
         self.logger.debug("get_value_from_ipx: value is %s", car)
+        v =None
         try:
-            v = None
             v = self.ipx_value
             return car.to_valid_value(v)
         except Exception as err:
