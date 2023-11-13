@@ -77,23 +77,18 @@ config.json is devided in three sections : "homekit", "ipx", "devices".
 ## the homekit section.
  | key| default value| definition |
  |---|---|---|
- | "pincode"|none  | the Homekit accessory pin code.
- mandatory.
- ex : "pincode" : "511-37-112"|
-|    "bridge_name" |None| accessory name for Homekit applciations.
-mandatory.
-ex : "bridge_name": "ipx800"|
-|    "port" | None| The IP TCP port the bridge is listening on.
-mandatory
-ex : "port" : 51133|
+ | "pincode"|none  | the Homekit accessory pin code.<br><br>mandatory.<br>ex : "pincode" : "511-37-112" |
+|    "bridge_name" |None| accessory name for Homekit applications.<br>mandatory.<br>ex : "bridge_name": "ipx800" |
+|    "port" | None| The IP TCP port the bridge is listening on.<br>mandatory<br>ex : "port" : 51133 |
 
 Example : 
-** "komekit: {
+```
+ "komekit: {
  "pincode" : "511-37-112",
     "bridge_name" : "ipx800",
     "port" : 51133
     }
-    **
+```
 
 
 
