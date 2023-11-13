@@ -77,9 +77,9 @@ config.json is devided in three sections : "homekit", "ipx", "devices".
 ## the homekit section.
  | key| default value| definition |
  |---|---|---|
- | "pincode"|none  | the Homekit accessory pin code.<br><br>mandatory.<br>ex : "pincode" : "511-37-112" |
-|    "bridge_name" |None| accessory name for Homekit applications.<br>mandatory.<br>ex : "bridge_name": "ipx800" |
-|    "port" | None| The IP TCP port the bridge is listening on.<br>mandatory<br>ex : "port" : 51133 |
+ | "pincode"|none  | the Homekit accessory pin code.<br>mandatory.<br>ex : "pincode" : "511-37-112" |
+|    "bridge_name" |none| accessory name for Homekit applications.<br>mandatory.<br>ex : "bridge_name": "ipx800" |
+|    "port" | none| The IP TCP port the bridge is listening on.<br>mandatory<br>ex : "port" : 51133 |
 
 Example : 
 ```
@@ -87,10 +87,23 @@ Example :
  "pincode" : "511-37-112",
     "bridge_name" : "ipx800",
     "port" : 51133
-    }
+}
 ```
+## the ipx section.
+ | key| default value| definition |
+ |---|---|---|
+ | "host"|none  | the IPX800V4 IP address or hostname.<br>mandatory<br>ex : "host" : "192.168.7.99" |
+|    "port" |80| The IPX800V4 API TCP port.<br><br>ex :"port" : "80" |
+|    "interval" | 250| the interval in msec between two HTTP request sent to the IPX. HTTP request are used to Get the devices status. The bridge send ONE HTTP request per device category. For example all "R" devices are read in one request.<br>There is no need to high frequency updates.  <br>ex : "interval" : 250 |
+|"apikey"|none|The API declared on your IPX.<br> ex : "apikey" : "XXXXXXXXX"|
 
+Example : 
+```
+ "ipx800: {
+  "host" : "192.168.7.99",
+    "port" : "80",
+    "interval" : 250,
+    "apikey" : "XXXXXXXXX"
+}
 
-
-
-TBD
+## TBC
