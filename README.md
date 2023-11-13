@@ -71,6 +71,31 @@ Task settings is :
 # configuration file
 
 Configuration is based on a JSON file.
+It's name must be config.json and stored in the config directory.
+Use sample_config.json for your first config file.
+config.json is devided in three sections : "homekit", "ipx", "devices".
+## the homekit section.
+ | key| default value| definition |
+ |---|---|---|
+ | "pincode"|none  | the Homekit accessory pin code.
+ mandatory.
+ ex : "pincode" : "511-37-112"|
+|    "bridge_name" |None| accessory name for Homekit applciations.
+mandatory.
+ex : "bridge_name": "ipx800"|
+|    "port" | None| The IP TCP port the bridge is listening on.
+mandatory
+ex : "port" : 51133|
+
+Example : 
+** "komekit: {
+ "pincode" : "511-37-112",
+    "bridge_name" : "ipx800",
+    "port" : 51133
+    }
+    **
+
+
 
 
 TBD
