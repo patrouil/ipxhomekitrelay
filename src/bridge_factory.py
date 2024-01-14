@@ -31,6 +31,9 @@ class BridgeFactory:
                 self.logger.info("_get_bridge:loading type %s as %s", dev_definition.get('service'),
                                  dev_definition.get('name'))
                 bridge.add_accessory(acc_instance)
+            else:
+                self.logger.error("_get_bridge:no definition for type %s as %s", dev_definition.get('service'),
+                                 dev_definition.get('name'))
             # end if
         # end for
         return bridge

@@ -11,5 +11,6 @@ class IPXCommonSensor(IPXAdapter):
         service = self.add_preload_service(serviceName)
         self.key_characteristics = service.configure_char(
             required_char_name)
+        return
     #end
 # end class

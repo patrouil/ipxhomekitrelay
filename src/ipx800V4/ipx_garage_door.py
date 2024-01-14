@@ -95,7 +95,7 @@ class IPXGarageDoorOpener(IPXAdapter):
     # end
 
     @Accessory.run_at_interval(5)
-    async def run(self):
+    def run(self):
         v = self.ipx_value
         if ( self._state  == IPXGarageDoorOpener.CLOSING_STATE
                 or self._state  == IPXGarageDoorOpener.OPENING_STATE ) :

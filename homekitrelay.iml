@@ -12,6 +12,5 @@
     </content>
     <orderEntry type="jdk" jdkName="Python 3.9 (homekitrelay)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Python 3.9 (venv) interpreter library" level="application" />
   </component>
 </module>

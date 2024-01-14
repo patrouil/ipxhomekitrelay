@@ -8,6 +8,9 @@ from ipx800V4.ipx_temperature_sensor import IPXTemperatureSensor
 from ipx800V4.ipx_light_bulb import IPXLightbulb
 from ipx800V4.ipx_window_covering import IPXWindowCovering
 from ipx800V4.ipx_outlet import IPXOutlet
+from ipx800V4.ipx_contact_sensor import IPXContactSensor
+from ipx800V4.ipx_motion_sensor import IPXMotionSensor
+from ipx800V4.ipx_occupancy_sensor import IPXOccupancySensor
 
 _device_association = {
     IPXGarageDoorOpener.serviceName: IPXGarageDoorOpener,
@@ -17,12 +20,15 @@ _device_association = {
     IPXOutlet.serviceName: IPXOutlet,
     IPXTemperatureSensor.serviceName: IPXTemperatureSensor,
     IPXWindowCovering.serviceName: IPXWindowCovering,
+    IPXContactSensor.serviceName : IPXContactSensor,
+    IPXMotionSensor.serviceName : IPXMotionSensor,
+    IPXOccupancySensor.serviceName : IPXOccupancySensor
+
 }
 
-_logger = logging.getLogger(__name__)
-
-
 class DeviceFactory:
+
+    _logger = logging.getLogger(__name__)
 
     @staticmethod
     def bind(driver, deviceConfig) -> IPXAdapter:
@@ -30,7 +36,7 @@ class DeviceFactory:
         assert (t is not None)
         d = _device_association.get(t)
         if d is None:
-            _logger.error("device service is invalid: >%s<", t)
+            DeviceFactory._logger.error("device service is invalid: >%s<", t)
             return None
         return d(device=deviceConfig, driver=driver)
 

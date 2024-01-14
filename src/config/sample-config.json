@@ -16,7 +16,7 @@
     {
       "name" : "Portail",
       "service" : "GarageDoorOpener",
-      "key" : "VO49",
+      "key" : "VO60",
       "open" : "SetR=9",
       "close" : "SetR=10",
       "obstruction" : "VO04"

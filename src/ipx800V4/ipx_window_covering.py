@@ -45,7 +45,6 @@ class IPXWindowCovering(IPXAdapter):
 
     def _to_homekit_range(self, val: int) -> int:
         return -val + 100
-
     # end
 
     def set_position(self, value=0) -> None:
@@ -80,7 +79,7 @@ class IPXWindowCovering(IPXAdapter):
     # end
 
     @Accessory.run_at_interval(5)
-    async def run(self):
+    def run(self):
         v = self.ipx_value
         if ( self._curr_state != IPXWindowCovering.POS_STATE_Stopped) :
             self.valueChangedListener(self.key, v, str(self._lastLevel))
